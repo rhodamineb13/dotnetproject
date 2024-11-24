@@ -19,4 +19,6 @@ public class AppContext : DbContext {
         
         optionsBuilder.UseNpgsql(config.GetConnectionString("AppContext"));
     }
+
+    
 }
