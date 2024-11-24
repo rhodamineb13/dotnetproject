@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 namespace dotnetproject.Data;
 
 public class AppContext : DbContext {
-    public DbSet<dotnetproject.Models.Book>? Books { get; set; }
-    public DbSet<dotnetproject.Models.User>? Users { get; set; }
-    public DbSet<dotnetproject.Models.BookTransaction>? BookTransactions { get; set; }
+    public DbSet<dotnetproject.Models.Entities.Book>? Books { get; set; }
+    public DbSet<dotnetproject.Models.Entities.User>? Users { get; set; }
+    public DbSet<dotnetproject.Models.Entities.BookTransaction>? BookTransactions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnetproject.Models;
+namespace dotnetproject.Models.Entities;
 
 public class Book {
 

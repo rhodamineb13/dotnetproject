@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
-namespace dotnetproject.Models;
+namespace dotnetproject.Models.Entities;
 
 public class BookTransaction {
     [Column("id"), Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
