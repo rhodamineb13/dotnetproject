@@ -1,4 +1,7 @@
+using dotnetproject.Helpers;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddBookService();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

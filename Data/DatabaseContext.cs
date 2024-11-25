@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace dotnetproject.Data;
 
-public class AppContext : DbContext {
-    public DbSet<dotnetproject.Models.Entities.Book>? Books { get; set; }
-    public DbSet<dotnetproject.Models.Entities.User>? Users { get; set; }
-    public DbSet<dotnetproject.Models.Entities.BookTransaction>? BookTransactions { get; set; }
+public class ApplicationContext : DbContext {
+    public DbSet<dotnetproject.Models.Entities.BookEntity>? Books { get; set; }
+    public DbSet<dotnetproject.Models.Entities.UserEntity>? Users { get; set; }
+    public DbSet<dotnetproject.Models.Entities.BookTransactionEntity>? BookTransactions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -20,5 +20,4 @@ public class AppContext : DbContext {
         optionsBuilder.UseNpgsql(config.GetConnectionString("AppContext"));
     }
 
-    
 }

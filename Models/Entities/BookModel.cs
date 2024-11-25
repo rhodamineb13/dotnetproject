@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace dotnetproject.Models.Entities;
 
-public class Book {
+public class BookEntity {
 
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int? Id { get; set; }
@@ -30,4 +30,15 @@ public class Book {
     [Column("deleted_at")]
     public DateTime? DeletedAt { get; set; }
 
+}
+
+public class BookPaginationEntity {
+    public string? Title { get; set; }
+    public string? Author { get; set; }
+    public int? QtyGreaterThan { get; set; }
+    public int? QtySmallerThan { get; set; }
+    public DateTime? CreatedBefore { get; set; }
+    public DateTime? CreatedAfter { get; set; }
+    public int? Limit { get; set; }
+    public int? Offset { get; set; }
 }

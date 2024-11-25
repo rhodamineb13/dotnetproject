@@ -4,17 +4,17 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace dotnetproject.Models.Entities;
 
-public class BookTransaction {
+public class BookTransactionEntity {
     [Column("id"), Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int? Id { get; set; }
 
     [Column("user_id"), NotNull]
     public int? UserId { get; set; }
-    public User? User { get; set; }
+    public UserEntity? User { get; set; }
 
     [Column("book_id"), NotNull]
     public int? BookId { get; set; }
-    public Book? Book { get; set; }
+    public BookEntity? Book { get; set; }
 
     [Column("borrowed_at"), NotNull]
     public DateTime? BorrowedAt { get; set; }

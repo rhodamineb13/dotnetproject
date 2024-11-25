@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace dotnetproject.Models.Entities;
 
-public class User {
+public class UserEntity {
 
     [Column("id"), Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int? Id { get; set; }
