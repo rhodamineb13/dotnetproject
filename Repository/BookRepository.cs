@@ -5,8 +5,8 @@ namespace dotnetproject.Repository;
 
 public interface IBookRepository {
     public IEnumerable<BookEntity>? GetBooks(BookPaginationEntity page);
-    public BookEntity FindByID(int bookId);
-    public BookEntity Insert(BookEntity book);
+    public BookEntity? FindByID(int bookId);
+    public BookEntity? Insert(BookEntity book);
     public void Update(BookEntity book);
     public void Delete(int bookId);
 }
@@ -23,8 +23,9 @@ public class BookRepository : IBookRepository {
        return bookList;
     }
 
-    public BookEntity FindByID(int bookId) {
-        return new BookEntity();
+    public BookEntity? FindByID(int bookId) {
+        BookEntity? book = this._db.Books.Find(bookId);
+        return book;
     }
 
     public BookEntity Insert(BookEntity book) {
@@ -35,8 +36,12 @@ public class BookRepository : IBookRepository {
     }
 
     public void Update(BookEntity book) {
+        this._db.Books.Update(book);
+        this._db.SaveChanges();
     }
 
     public void Delete(int bookId) {
+        this._db.Books.Remove(new BookEntity(){ Id = bookId});
+        this._db.SaveChanges();
     }
 }

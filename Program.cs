@@ -2,31 +2,37 @@ using dotnetproject.Helpers;
 using dotnetproject.Data;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<ApplicationContext>(options =>
-{
-    IConfigurationRoot config = new ConfigurationBuilder()
-                                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                                    .AddJsonFile("appsettings.json")
-                                    .Build();
-    options.UseNpgsql(config.GetConnectionString("AppContext"));
-});
+public class Programs {
+    public static void Main(string []args) {
+        var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddBookService();
+        EnvConfig e = new EnvConfig();
+        e.Load(".env");
+        Dictionary<string, string> eDict = e.EnvVariables;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+        builder.Services.AddDbContext<ApplicationContext>(options =>
+        {
+            options.UseNpgsql($"Host={eDict["DATABASE_HOST"]};Port={eDict["DATABASE_PORT"]};Username={eDict["DATABASE_USER"]};Password={eDict["DATABASE_PASS"]};Database={eDict["DATABASE_NAME"]}");
+        });
 
-var app = builder.Build();
+        builder.Services.AddBookService();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+        // Add services to the container.
+        builder.Services.AddControllersWithViews();
+
+        WebApplication app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (!app.Environment.IsDevelopment())
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.MapControllers();
+        app.Run();
+    }
 }
 
-app.MapControllers();
 
-app.Run();
