@@ -1,6 +1,17 @@
 using dotnetproject.Helpers;
+using dotnetproject.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApplicationContext>(options =>
+{
+    IConfigurationRoot config = new ConfigurationBuilder()
+                                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                                    .AddJsonFile("appsettings.json")
+                                    .Build();
+    options.UseNpgsql(config.GetConnectionString("AppContext"));
+});
+
 builder.Services.AddBookService();
 
 // Add services to the container.

@@ -28,7 +28,10 @@ public class BookRepository : IBookRepository {
     }
 
     public BookEntity Insert(BookEntity book) {
-        return new BookEntity();
+        this._db.Books.Add(book);
+        this._db.SaveChanges();
+
+        return book;
     }
 
     public void Update(BookEntity book) {

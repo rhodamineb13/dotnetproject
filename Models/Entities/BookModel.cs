@@ -9,7 +9,7 @@ namespace dotnetproject.Models.Entities;
 
 public class BookEntity {
 
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("id"), Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int? Id { get; set; }
 
     [Column("title"), NotNull]
@@ -21,10 +21,10 @@ public class BookEntity {
     [Column("quantity"), NotNull]
     public int? Qty { get; set; }
 
-    [Column("created_at"), NotNull]
+    [Column("created_at"), NotNull, DefaultValue("NOW()")]
     public DateTime? CreatedAt { get; set; }
 
-    [Column("updated_at"), NotNull]
+    [Column("updated_at"), NotNull, DefaultValue("NOW()")]
     public DateTime? UpdatedAt { get; set; }
 
     [Column("deleted_at")]

@@ -1,4 +1,5 @@
 using System.Net;
+using System;
 using Microsoft.AspNetCore.Mvc;
 using dotnetproject.Models.Entities;
 using dotnetproject.Models.DTO;
@@ -50,12 +51,21 @@ public class BookController : Controller
                 Data = book
             });
         }
-        catch (System.Exception)
+        catch (NotFoundException)
         {
             return NotFound(new Response {
                 StatusCode = HttpStatusCode.NotFound,
                 Message = $"Book with ID {bookId} not found",
                 Data = null
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError, new Response
+            {
+                StatusCode = HttpStatusCode.InternalServerError,
+                Message = $"Unexpected error in making request: {ex}",
+                Data = null,
             });
         }
     }
@@ -65,17 +75,70 @@ public class BookController : Controller
     public IActionResult InsertNewBook([FromBody] BookDTO book) {
         try
         {
-            BookDTO bookResult = this._usecase.CreateNewBook(book);
+            BookDTO? bookResult = this._usecase.CreateNewBook(book);
             return Ok(new Response{
                 StatusCode = HttpStatusCode.Created,
                 Message = "successfully inserted a new book into the database",
                 Data= bookResult,
             });
         }
-        catch (System.Exception)
+        catch (BadRequestException ex)
         {
-            throw;
+            return BadRequest(new Response{
+                StatusCode = HttpStatusCode.BadRequest,
+                Message = $"bad request: {ex}"
+            });
+        }
+        catch (UnknownException ex)
+        {
+            return StatusCode((int)HttpStatusCode.InternalServerError, new Response
+            {
+                StatusCode = HttpStatusCode.InternalServerError,
+                Message = $"Unexpected error in making request: {ex}",
+                Data = null,
+            });
+        }
+    }
+    [HttpPut]
+    [Route("/v1/books/{booksId}")]
+    public IActionResult UpdateBook([FromBody] BookDTO book) {
+        try
+        {
+            this._usecase.UpdateBook(book);
+            return Ok(new Response{
+                StatusCode = HttpStatusCode.OK,
+                Message = "successfully updated book data",
+                Data = book,
+            });
+        }
+        catch (BadRequestException ex)
+        {
+            return BadRequest(new Response{
+                StatusCode = HttpStatusCode.BadRequest,
+                Message = $"bad request: {ex}"
+            });
         }
     }
 
+    [HttpDelete]
+    [Route("/v1/books/{bookId}")]
+    public IActionResult DeleteBook([FromQuery] int bookId) {
+        try
+        {
+            this._usecase.DeleteBook(bookId);
+            return Ok(new Response{
+                StatusCode = HttpStatusCode.OK,
+                Message = $"successfully deleted book with ID = {bookId}",
+                Data = null
+            });
+        }
+        catch (BadRequestException)
+        {
+            return BadRequest(new Response{
+                StatusCode = HttpStatusCode.BadRequest,
+                Message = $"bad request",
+                Data = null
+            });
+        }
+    }
 }
