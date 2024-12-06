@@ -1,5 +1,6 @@
 using dotnetproject.Data;
 using dotnetproject.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnetproject.Repository;
 

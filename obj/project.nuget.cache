@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "8Cf79D5z3B0RwdLVrhrUMKPoVx2JdX5CJhrlcZ03OFOjP+sLQAIqxcfzlgrPLKMaBh4nZoRLGkS0bd0DZebuSQ==",
+  "dgSpecHash": "x+HB32mVezFuF93jOXFUfhzCSZhrjsjv4CRGggzO+D3iV0Sx3NkPwydOnuoVs+Mz3cbn9gorJ/m+x++GI/Cy+Q==",
   "success": true,
   "projectFilePath": "/home/aliffianricky/rhodamineb13/dotnetproject/dotnetproject.csproj",
   "expectedPackageFiles": [
+    "/home/aliffianricky/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/home/aliffianricky/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/aliffianricky/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "/home/aliffianricky/.nuget/packages/microsoft.build.framework/17.8.3/microsoft.build.framework.17.8.3.nupkg.sha512",

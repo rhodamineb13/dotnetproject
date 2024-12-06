@@ -7,9 +7,9 @@ using dotnetproject.Models.Entities;
 namespace dotnetproject.Data;
 
 public class ApplicationContext : DbContext {
-    public DbSet<dotnetproject.Models.Entities.BookEntity>? Books { get; set; }
-    public DbSet<dotnetproject.Models.Entities.UserEntity>? Users { get; set; }
-    public DbSet<dotnetproject.Models.Entities.BookTransactionEntity>? BookTransactions { get; set; }
+    public required DbSet<dotnetproject.Models.Entities.BookEntity> Books { get; set; }
+    public required DbSet<dotnetproject.Models.Entities.UserEntity> Users { get; set; }
+    public required DbSet<dotnetproject.Models.Entities.BookTransactionEntity> BookTransactions { get; set; }
 
     public ApplicationContext(DbContextOptions<ApplicationContext> dbContextOptions) : base(dbContextOptions) {}
 

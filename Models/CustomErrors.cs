@@ -21,8 +21,34 @@ public class NotCreatedException : Exception {
     public NotCreatedException(string message, Exception inner) : base(message, inner) { }
 }
 
+
+
 public class BadRequestException : Exception {
     public BadRequestException() { }
     public BadRequestException(string message) : base(message) { }
     public BadRequestException(string message, Exception inner) : base(message, inner) { }
+}
+public class UserRegisteredException : Exception {
+    public UserRegisteredException() { }
+    public UserRegisteredException(string message) : base(message) { }
+    public UserRegisteredException(string message, Exception inner) : base(message, inner) { }
+}
+
+
+public class UserNotFoundException : Exception {
+    public UserNotFoundException() { }
+    public UserNotFoundException(string message) : base(message) { }
+    public UserNotFoundException(string message, Exception inner) : base(message, inner) { }
+}
+
+public class GeneratePasswordFailedException: Exception {
+    public GeneratePasswordFailedException() { }
+    public GeneratePasswordFailedException(string message) : base(message) { }
+    public GeneratePasswordFailedException(string message, Exception inner) : base(message, inner) { }
+}
+
+public class ComparePasswordFailException: Exception {
+    public ComparePasswordFailException() { }
+    public ComparePasswordFailException(string message) : base(message) { }
+    public ComparePasswordFailException(string message, Exception inner) : base(message, inner) { }
 }

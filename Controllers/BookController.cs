@@ -101,9 +101,10 @@ public class BookController : Controller
     }
     [HttpPut]
     [Route("/v1/books/{booksId}")]
-    public IActionResult UpdateBook([FromBody] BookDTO book) {
+    public IActionResult UpdateBook([FromBody] BookDTO book, [FromRoute] int booksId) {
         try
         {
+            book.ID = booksId;
             this._usecase.UpdateBook(book);
             return Ok(new Response{
                 StatusCode = HttpStatusCode.OK,
@@ -111,18 +112,18 @@ public class BookController : Controller
                 Data = book,
             });
         }
-        catch (BadRequestException ex)
+        catch (NotFoundException ex)
         {
             return BadRequest(new Response{
-                StatusCode = HttpStatusCode.BadRequest,
-                Message = $"bad request: {ex}"
+                StatusCode = HttpStatusCode.NotFound,
+                Message = $"ID not found",
             });
         }
     }
 
     [HttpDelete]
     [Route("/v1/books/{bookId}")]
-    public IActionResult DeleteBook([FromQuery] int bookId) {
+    public IActionResult DeleteBook([FromRoute] int bookId) {
         try
         {
             this._usecase.DeleteBook(bookId);

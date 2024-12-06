@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace dotnetproject.Models.DTO;
 
 public class BookDTO {
     public int? ID { get; set; }
+    [Required]
     public string? Title { get; set; }
+    [Required]
     public string? Author { get; set; }
+    [Range(1, int.MaxValue)]
     public int? Qty { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

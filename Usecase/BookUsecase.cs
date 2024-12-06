@@ -81,7 +81,21 @@ public class BookUsecase : IBookUsecase{
     }
 
     public void UpdateBook(BookDTO bookDTO) {
+        try 
+        {
+            BookEntity bookEntity = new() {
+                Id = bookDTO.ID,
+                Title = bookDTO.Title,
+                Author = bookDTO.Author,
+                Qty = bookDTO.Qty,
+            };
 
+            this._bookRepo.Update(bookEntity);
+        }
+        catch (Exception e) 
+        {
+
+        }
     }
 
     public void DeleteBook(int bookId) {
